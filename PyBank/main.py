@@ -8,7 +8,7 @@ cont=int(0)
 avg_chg=float(0)
 grt_inc=[]
 grt_dec=[]
-Dates=[]
+dates=[]
 pl_chg=[0]
 row_b=[]
 
@@ -16,7 +16,6 @@ import csv
 import os 
 
 #Defining source file path    
-
 dir0='.'
 dir1='Resources'
 file_name='budget_data.csv'
@@ -38,7 +37,7 @@ with open (main_file,"r") as src_file:
         sum_pl=int(lines[1])+sum_pl
 
         #Create a list for the dates that will serve as reference 
-        Dates.append(lines[0])
+        dates.append(lines[0])
        
        #trick to avoid a mistake in the first monthly difference
         if cont==0:
@@ -57,8 +56,8 @@ with open (main_file,"r") as src_file:
     grt_dec=min(pl_chg)
     
     #Look for the corresponding dates for the max and min in the Date string
-    F_maxi=Dates[pl_chg.index(grt_inc)]
-    F_maxd=Dates[pl_chg.index(grt_dec)]
+    f_maxi=dates[pl_chg.index(grt_inc)]
+    f_maxd=dates[pl_chg.index(grt_dec)]
     
     #Calculate the Avergae PL change
     avg_chg=sum(pl_chg)/ (tot_month-1)
@@ -73,8 +72,8 @@ with open (main_file,"r") as src_file:
     row_b.append(f"Total Months: {tot_month}")
     row_b.append(f"Total: ${sum_pl}")
     row_b.append(f"Average change: ${round(avg_chg,2)}")
-    row_b.append(f"Greatest Increase in Profits: {F_maxi}  (${grt_inc})")
-    row_b.append(f"Greatest Decrease in Profits: {F_maxd} (${grt_dec})")
+    row_b.append(f"Greatest Increase in Profits: {f_maxi}  (${grt_inc})")
+    row_b.append(f"Greatest Decrease in Profits: {f_maxd} (${grt_dec})")
     row_b.append('---')
     row_b.append(f"Data calculated as of {now}")
 
